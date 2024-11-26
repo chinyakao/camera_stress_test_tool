@@ -40,7 +40,7 @@ if __name__ == '__main__':
     driver.implicitly_wait(10)
     
     print(f'INFO: test cycle #{i+1} testing camera')
-    sleep(40)
+    sleep(60)
     
     print(f'INFO: test cycle #{i+1} checking test result')
     completed = driver.find_element(By.XPATH, '//*[@id="webcam-notices"]/li[29]').text

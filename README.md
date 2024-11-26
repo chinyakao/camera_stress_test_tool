@@ -1,6 +1,12 @@
 # Camera Stress Test Tool
 Running camera stress test by webcamtests.com
 
+## Pre-request
+```
+sudo apt update
+sudo apt install git python3 python3-pip python3-venv
+```
+
 ## Setup
 ```
 git clone https://github.com/chinyakao/camera_stress_test_tool.git
