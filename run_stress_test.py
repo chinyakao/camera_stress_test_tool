@@ -43,11 +43,11 @@ if __name__ == '__main__':
     sleep(60)
     
     print(f'INFO: test cycle #{i+1} checking test result')
-    completed = driver.find_element(By.XPATH, '//*[@id="webcam-notices"]/li[29]').text
+    completed = driver.find_element(By.XPATH, '//*[@id="webcam-notices"]').text
     if 'Testing was completed successfully.' in completed:
-      result += f"test cycle #{i+1} completed successfully.\n"
+      result += f"test cycle #{i+1} completed successfully:\n{completed}\n"
     else:
-      result += f"tset cycle #{i+1} failed.\n"
+      result += f"tset cycle #{i+1} failed:\n{completed}\n"
 
     print(f'INFO: test cycle #{i+1} catching camera info')
     info_table = driver.find_element(By.XPATH, '//*[@id="webcam-props"]/table').text
