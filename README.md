@@ -2,7 +2,7 @@
 Running camera stress test by webcamtests.com
 
 ## Pre-request
-1. Ubuntu OS with installed git/pyhon3/python3-venv
+1. Linux OS with installed git/pyhon3/python3-venv
   ```
   sudo apt update
   sudo apt install git python3 python3-pip python3-venv
