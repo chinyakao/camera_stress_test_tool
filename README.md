@@ -24,7 +24,7 @@ python3 run_stress_test.py -c {running cycles}
 
 leave venv
 ```
-deactiva
+deactivate
 ```
 
 catch the log under the `/log` folder
