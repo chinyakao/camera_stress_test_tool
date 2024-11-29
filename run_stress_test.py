@@ -25,6 +25,9 @@ if __name__ == '__main__':
   chrome_opt.add_experimental_option('prefs', prefs)
 
   driver = webdriver.Chrome(options=chrome_opt)
+  pass_cnt = 0
+  fail_cnt = 0
+  avg_rgb_cnt = {}
 
   for i in range(cycles):
     # Navigate to the https://webcamtests.com/
@@ -45,19 +48,31 @@ if __name__ == '__main__':
     print(f'INFO: test cycle #{i+1} checking test result')
     completed = driver.find_element(By.XPATH, '//*[@id="webcam-notices"]').text
     if 'Testing was completed successfully.' in completed:
-      result += f"test cycle #{i+1} completed successfully:\n{completed}\n"
+      result += f'test cycle #{i+1} completed successfully:\n{completed}\n'
+      pass_cnt += 1
     else:
-      result += f"tset cycle #{i+1} failed:\n{completed}\n"
+      result += f'tset cycle #{i+1} failed:\n{completed}\n'
+      fail_cnt += 1
 
     print(f'INFO: test cycle #{i+1} catching camera info')
     info_table = driver.find_element(By.XPATH, '//*[@id="webcam-props"]/table').text
-    result+= f"Webcam Information:\n{info_table}\n====================\n"
+    avg_rgb = driver.find_element(By.XPATH, '//*[@id="webcam-prop_image_rgb_color"]/div').value_of_css_property('background')
+    avg_rgb = avg_rgb.split(' n')[0]
+    result += f'Webcam Information:\n{info_table}\nAverage RGB Color: {avg_rgb}\n============================'
+
+    if avg_rgb in avg_rgb_cnt.keys():
+      avg_rgb_cnt[avg_rgb] += 1
+    else:
+      avg_rgb_cnt[avg_rgb] = 1
 
   driver.quit()
-  print(f'INFO: complete camera sress test for {cycles} cycles.')  
+  print(f'INFO: complete camera sress test for {cycles} cycles.')
 
-  file_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
-  f = open(f"./log/camera_stress_log_{file_datetime}.log", "a")
+  report = f'\n========== Report ==========\nPass: {pass_cnt}/{cycles}\nFail: {fail_cnt}/{cycles}\nAverage RGB Color: {avg_rgb_cnt}\n========== Details ==========\n'
+  result = report + result
+
+  file_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
+  f = open(f'./log/camera_stress_log_{file_datetime}.log', 'a')
   f.write(result)
   f.close()
   print(f'INFO: please refer to the file ./log/camera_stress_log_{file_datetime}.log to see the details.')
