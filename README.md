@@ -21,6 +21,9 @@ python3 -m pip install -r requirements.txt
 ```
 source .venv/bin/activate
 python3 run_stress_test.py -c {running cycles}
+
+dos2unix run_gst_stress.sh
+./run_gst_stress.sh -c {running cycles}
 ```
 
 leave venv
