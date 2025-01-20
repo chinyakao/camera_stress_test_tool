@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #set default count
 MAX_COUNT=100
 #initialize failure count
