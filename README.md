@@ -35,5 +35,6 @@ Mipi Camera
 
 ### Usage
 ```
+sudo chmod +x run_gst_stress.sh
 ./run_gst_stress.sh -c {running cycles}
 ```
